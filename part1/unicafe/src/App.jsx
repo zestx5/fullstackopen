@@ -8,14 +8,51 @@ const Statistics = ({ good, neutral, bad }) => {
   let all = good + bad + neutral;
   if (all) {
     return (
-      <>
-        <Paragraph value={`good ${good}`} />
-        <Paragraph value={`neutral ${neutral}`} />
-        <Paragraph value={`bad ${bad}`} />
-        <Paragraph value={`all ${all}`} />
-        <Paragraph value={`average ${(good - bad) / all || 0}`} />
-        <Paragraph value={`positive ${(good * 100) / all || 0}%`} />
-      </>
+      <table>
+        <thead>
+          <tr>
+            <th>Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <Paragraph value={`good`} />
+            </td>
+            <td>{good}</td>
+          </tr>
+          <tr>
+            <td>
+              <Paragraph value={`neutral`} />
+            </td>
+            <td>{neutral}</td>
+          </tr>
+          <tr>
+            <td>
+              <Paragraph value={`bad`} />
+            </td>
+            <td>{bad}</td>
+          </tr>
+          <tr>
+            <td>
+              <Paragraph value={`all`} />
+            </td>
+            <td>{all}</td>
+          </tr>
+          <tr>
+            <td>
+              <Paragraph value={`average`} />
+            </td>
+            <td>{((good - bad) / all).toFixed(1) || 0}</td>
+          </tr>
+          <tr>
+            <td>
+              <Paragraph value={`positive`} />
+            </td>
+            <td>{((good * 100) / all).toFixed(1) || 0}%</td>
+          </tr>
+        </tbody>
+      </table>
     );
   }
   return <Paragraph value={"No feedback given"} />;
@@ -26,7 +63,7 @@ const Button = ({ value, onClickHandler }) => {
 };
 
 const Paragraph = ({ value }) => {
-  return <p>{value}</p>;
+  return <div>{value}</div>;
 };
 
 const App = () => {
