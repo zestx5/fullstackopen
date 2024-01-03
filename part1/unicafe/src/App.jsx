@@ -16,17 +16,21 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [all, setAll] = useState(good + bad + neutral);
 
   const onClickUpdateFeedback = (value) => {
     switch (value) {
       case "good":
         setGood(good + 1);
+        setAll(all + 1);
         break;
       case "neutral":
         setNeutral(neutral + 1);
+        setAll(all + 1);
         break;
       case "bad":
         setBad(bad + 1);
+        setAll(all + 1);
     }
   };
 
@@ -40,6 +44,7 @@ const App = () => {
       <Paragraph value={`good ${good}`} />
       <Paragraph value={`neutral ${neutral}`} />
       <Paragraph value={`bad ${bad}`} />
+      <Paragraph value={`all ${all}`} />
     </>
   );
 };
