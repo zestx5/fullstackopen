@@ -6,16 +6,19 @@ const Heading = ({ value }) => {
 
 const Statistics = ({ good, neutral, bad }) => {
   let all = good + bad + neutral;
-  return (
-    <>
-      <Paragraph value={`good ${good}`} />
-      <Paragraph value={`neutral ${neutral}`} />
-      <Paragraph value={`bad ${bad}`} />
-      <Paragraph value={`all ${all}`} />
-      <Paragraph value={`average ${(good - bad) / all || 0}`} />
-      <Paragraph value={`positive ${(good * 100) / all || 0}%`} />
-    </>
-  );
+  if (all) {
+    return (
+      <>
+        <Paragraph value={`good ${good}`} />
+        <Paragraph value={`neutral ${neutral}`} />
+        <Paragraph value={`bad ${bad}`} />
+        <Paragraph value={`all ${all}`} />
+        <Paragraph value={`average ${(good - bad) / all || 0}`} />
+        <Paragraph value={`positive ${(good * 100) / all || 0}%`} />
+      </>
+    );
+  }
+  return <Paragraph value={"No feedback given"} />;
 };
 
 const Button = ({ value, onClickHandler }) => {
