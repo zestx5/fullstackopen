@@ -8,6 +8,10 @@ const Button = ({ onClickHandler, value }) => {
   );
 };
 
+const Heading = ({ text }) => {
+  return <h1>{text}</h1>;
+};
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -44,12 +48,35 @@ const App = () => {
     setPoints({ ...points, [selected]: points[selected] + 1 });
   };
 
+  const getMaxVotes = () => {
+    let max = 0;
+    let idx = 0;
+
+    for (const key in points) {
+      if (Object.hasOwnProperty.call(points, key)) {
+        const element = points[key];
+        if (max < element) {
+          max = element;
+          idx = key;
+        }
+      }
+    }
+    return idx;
+  };
+
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {points[selected]} votes</p>
-      <Button value={"hello cracker"} onClickHandler={onClickUpdateJoke} />
-      <Button value={"sick joke bro"} onClickHandler={onClickVoteForJoke} />
+      <div>
+        <Heading text={"Anecdote of the day"} />
+        <p>{anecdotes[selected]}</p>
+        <p>has {points[selected]} votes</p>
+        <Button value={"hello cracker"} onClickHandler={onClickUpdateJoke} />
+        <Button value={"sick joke bro"} onClickHandler={onClickVoteForJoke} />
+      </div>
+      <div>
+        <Heading text={"Anecdote with most votes"} />
+        <p>{anecdotes[getMaxVotes()]}</p>
+      </div>
     </div>
   );
 };
