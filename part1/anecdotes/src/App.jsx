@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-const Button = ({ onClickHandler }) => {
+const Button = ({ onClickHandler, value }) => {
   return (
     <div>
-      <button onClick={onClickHandler}>crack joke</button>
+      <button onClick={onClickHandler}>{value}</button>
     </div>
   );
 };
@@ -23,6 +23,16 @@ const App = () => {
     "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
     "The only way to go fast, is to go well.",
   ];
+  const [points, setPoints] = useState({
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+  });
 
   const [selected, setSelected] = useState(0);
 
@@ -30,10 +40,16 @@ const App = () => {
     setSelected(getRandomInt(anecdotes.length));
   };
 
+  const onClickVoteForJoke = () => {
+    setPoints({ ...points, [selected]: points[selected] + 1 });
+  };
+
   return (
     <div>
-      {anecdotes[selected]}
-      <Button onClickHandler={onClickUpdateJoke} />
+      <p>{anecdotes[selected]}</p>
+      <p>has {points[selected]} votes</p>
+      <Button value={"hello cracker"} onClickHandler={onClickUpdateJoke} />
+      <Button value={"sick joke bro"} onClickHandler={onClickVoteForJoke} />
     </div>
   );
 };
