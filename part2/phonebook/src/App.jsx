@@ -14,6 +14,14 @@ const App = () => {
   const onClickAddNewPerson = (e) => {
     e.preventDefault();
     if (newName == "") return;
+    if (
+      persons.find(
+        (p) => p.name.toLocaleLowerCase() == newName.toLocaleLowerCase()
+      )
+    ) {
+      alert(`${newName} is already added to phonebook`);
+      return;
+    }
     setPersons(persons.concat({ name: newName }));
     setNewName("");
   };

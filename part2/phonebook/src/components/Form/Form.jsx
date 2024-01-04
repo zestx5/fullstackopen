@@ -1,4 +1,4 @@
-function Form({ onSubmitHandler: onClickHandler, value, onChangeHandler }) {
+function Form({ onClickHandler, value, onChangeHandler }) {
   return (
     <form>
       <div>
