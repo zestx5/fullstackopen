@@ -10,7 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
-  const [personsToShow, setPersonsToShow] = useState(persons);
+  const [personsToShow, setPersonsToShow] = useState([]);
 
   const fetchPersonData = () => {
     personService.getAll().then((initialPersons) => {
@@ -50,12 +50,17 @@ const App = () => {
       return;
     }
     const person = { name: newName, number: newNumber };
-    personService.newPerson(person);
-    setPersons(persons.concat(person));
-    setPersonsToShow(persons.concat(person));
+    personService.create(person).then(fetchPersonData);
+    fetchPersonData();
     setNewName("");
     setNewNumber("");
     setFilter("");
+  };
+
+  const onClickDeletePerson = (id) => {
+    if (window.confirm("Delete this person?")) {
+      personService.remove(id).then(fetchPersonData);
+    }
   };
 
   return (
@@ -71,7 +76,10 @@ const App = () => {
         numberValue={newNumber}
       />
       <Header text={"Numbers"} />
-      <Numbers numberList={personsToShow} />
+      <Numbers
+        numberList={personsToShow}
+        onClickDeleteHandler={onClickDeletePerson}
+      />
     </div>
   );
 };

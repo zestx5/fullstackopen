@@ -9,8 +9,8 @@ const getAll = () => {
     });
 };
 
-const newPerson = (person) => {
-  axios
+const create = (person) => {
+  return axios
     .post("http://localhost:3001/persons", person)
     .then((r) => {
       console.log(r);
@@ -20,4 +20,15 @@ const newPerson = (person) => {
     });
 };
 
-export default { getAll, newPerson };
+const remove = (id) => {
+  return axios
+    .delete(`http://localhost:3001/persons/${id}`)
+    .then((r) => {
+      console.log(r);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+export default { getAll, create, remove };
