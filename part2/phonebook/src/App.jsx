@@ -41,12 +41,17 @@ const App = () => {
   const onClickAddNewPerson = (e) => {
     e.preventDefault();
     if (newName == "") return;
-    if (
-      persons.find(
-        (p) => p.name.toLocaleLowerCase() == newName.toLocaleLowerCase()
-      )
-    ) {
-      alert(`${newName} is already added to phonebook`);
+    const personExists = persons.find(
+      (p) => p.name.toLocaleLowerCase() == newName.toLocaleLowerCase()
+    );
+    if (personExists) {
+      personExists.number = newNumber;
+      if (window.confirm(`Update ${newName} number ?`)) {
+        personService.update(personExists).then(fetchPersonData);
+        setNewName("");
+        setNewNumber("");
+        setFilter("");
+      }
       return;
     }
     const person = { name: newName, number: newNumber };

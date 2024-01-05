@@ -31,4 +31,12 @@ const remove = (id) => {
     });
 };
 
-export default { getAll, create, remove };
+const update = (person) => {
+  return axios
+    .put(`http://localhost:3001/persons/${person.id}`, person)
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+export default { getAll, create, remove, update };
