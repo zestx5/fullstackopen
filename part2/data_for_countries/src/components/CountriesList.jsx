@@ -11,6 +11,7 @@ function CountriesList({ countries }) {
         return { country: c, show: false };
       })
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onClickShowCountry = (i) => {
