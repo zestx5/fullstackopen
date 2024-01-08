@@ -99,6 +99,7 @@ const App = () => {
           setNotification("User deleted", MESSAGE.success);
         })
         .catch(() => {
+          console.log("here");
           setNotification("Delete error", MESSAGE.error);
         });
     }
