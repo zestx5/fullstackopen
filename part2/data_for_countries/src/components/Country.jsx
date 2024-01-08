@@ -18,8 +18,8 @@ function Country({ country }) {
       </div>
       <h3>Languages: </h3>
       <ul>
-        {languages.map((l) => (
-          <li>{l}</li>
+        {languages.map((l, i) => (
+          <li key={l[0] + i}>{l}</li>
         ))}
       </ul>
       <img src={country.flags.png} />
